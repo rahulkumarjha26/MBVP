@@ -35,7 +35,7 @@ export const articles: Article[] = [
     date: "March 2025",
     readTime: "8 min read",
     excerpt: "In 2005, when his office handpump ran completely dry, one man decided to fight back. His 12-year journey transformed into a national environmental movement that saved 200+ ponds and inspired thousands of people across India.",
-    featuredImage: "https://pplx-res.cloudinary.com/image/upload/v1757343881/pplx_project_search_images/450233d3c48b22e9942f0581924d0abf670ac001.png",
+    featuredImage: "https://imgs.mongabay.com/wp-content/uploads/sites/30/2020/10/01203834/Narayanji-Choudhary_Mongabay_1200-1200x800.jpg",
     imageCaption: "Rural water conservation: multiple ponds showcasing pond restoration and community water management.",
     content: {
       sections: [
