@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* MGVP Brand Colors - Earth Tones */
+    --primary: 154 42% 30%;           /* #2D6A4F - Trust green */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 28 100% 48%;         /* #F77F00 - Energy orange */
+    --secondary-foreground: 0 0% 100%;
+    
+    --accent: 42 97% 64%;             /* #FCBF49 - Sunshine yellow */
+    --accent-foreground: 154 42% 30%;
+    
+    --background: 0 0% 100%;          /* #FFFFFF - Clean white */
+    --foreground: 210 11% 15%;        /* #212529 - Dark charcoal */
+    
+    --card: 0 0% 100%;
+    --card-foreground: 210 11% 15%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 11% 15%;
+    
+    --muted: 210 17% 98%;             /* #F8F9FA - Light beige */
+    --muted-foreground: 0 0% 40%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 154 42% 30%;
+    
+    --radius: 0.75rem;
+    
+    /* Custom Design Tokens */
+    --warm-overlay: rgba(247, 127, 0, 0.1);
+    --green-overlay: rgba(45, 106, 79, 0.7);
+    --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-elevated: 0 4px 12px rgba(45, 106, 79, 0.15);
+    --shadow-button: 0 4px 12px rgba(247, 127, 0, 0.3);
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, rgba(45, 106, 79, 0.7), rgba(45, 106, 79, 0.4));
+    --gradient-cta: linear-gradient(90deg, hsl(28 100% 48%), hsl(154 42% 30%));
+    
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5% 26%;
+    --sidebar-primary: 154 42% 30%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 5% 96%;
+    --sidebar-accent-foreground: 154 42% 30%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 154 42% 30%;
+  }
+
+  .dark {
+    --primary: 154 42% 35%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 28 100% 55%;
+    --secondary-foreground: 0 0% 100%;
+    
+    --accent: 42 97% 70%;
+    --accent-foreground: 154 42% 20%;
+    
+    --background: 210 11% 15%;
+    --foreground: 0 0% 98%;
+    
+    --card: 210 11% 18%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 210 11% 18%;
+    --popover-foreground: 0 0% 98%;
+    
+    --muted: 210 11% 22%;
+    --muted-foreground: 0 0% 65%;
+    
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 210 11% 25%;
+    --input: 210 11% 25%;
+    --ring: 154 42% 50%;
+    
+    --sidebar-background: 210 11% 12%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 154 42% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 11% 20%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 210 11% 20%;
+    --sidebar-ring: 154 42% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
