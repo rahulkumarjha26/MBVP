@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When A Handpump Went Dry - MGVP Blog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #264d3c;
+            --primary-light: #5A9B7E;
+            --secondary: #E67E22;
+            --secondary-light: #FFAB33;
+            --accent: #F4C430;
+            --mithila-red: #D84433;
+            --earth-brown: #6B4423;
+            --background: #FFFFFF;
+            --background-light: #F5F0EB;
+            --foreground: #212529;
+            --foreground-light: #4A5568;
+            --border: #E2E8F0;
+            --radius: 12px;
+            --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-elevated: 0 4px 12px rgba(38, 77, 60, 0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.8;
+            color: var(--foreground);
+            background-color: var(--background-light);
+        }
+
+        /* ============ HEADER ============ */
+        header {
+            background: white;
+            border-bottom: 2px solid var(--border);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-soft);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--foreground);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .cta-button {
+            background: var(--secondary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--secondary-light);
+        }
+
+        /* ============ BREADCRUMB ============ */
+        .breadcrumb {
+            max-width: 800px;
+            margin: 2rem auto 1rem;
+            padding: 0 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* ============ ARTICLE HEADER ============ */
+        .article-header {
+            max-width: 900px;
+            margin: 2rem auto 3rem;
+            padding: 0 2rem;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .article-meta-item {
+            font-size: 0.9rem;
+            color: var(--foreground-light);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .article-meta-divider {
+            width: 4px;
+            height: 4px;
+            background: var(--border);
+            border-radius: 50%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            margin: 1rem 0;
+            color: var(--foreground);
+        }
+
+        .article-excerpt {
+            font-size: 1.1rem;
+            color: var(--foreground-light);
+            font-style: italic;
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .article-author-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--background-light);
+            border-radius: var(--radius);
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .author-details h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-details p {
+            font-size: 0.85rem;
+            color: var(--foreground-light);
+        }
+
+        /* ============ FEATURED IMAGE ============ */
+        .article-featured-image {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .article-featured-image img {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-elevated);
+        }
+
+        .image-caption {
+            font-size: 0.85rem;
+            color: var(--foreground-light);
+            margin-top: 0.75rem;
+            font-style: italic;
+        }
+
+        /* ============ ARTICLE CONTENT ============ */
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .article-content {
+            padding: 3rem 2rem;
+            line-height: 1.9;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+            color: #333;
+        }
+
+        .article-content h2 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin: 2.5rem 0 1rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--border);
+        }
+
+        .article-content h3 {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.75rem;
+        }
+
+        /* ============ HIGHLIGHT BOX ============ */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(38, 77, 60, 0.05), rgba(230, 126, 34, 0.05));
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box strong {
+            color: var(--primary);
+        }
+
+        /* ============ QUOTE ============ */
+        blockquote {
+            border-left: 4px solid var(--secondary);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-size: 1.1rem;
+            color: var(--secondary);
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        /* ============ TABLE ============ */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-soft);
+        }
+
+        table th {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        table tr:hover {
+            background: var(--background-light);
+        }
+
+        /* ============ SIDEBAR ============ */
+        .article-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sidebar-widget {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .sidebar-widget h3 {
+            color: var(--primary);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .social-share {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .share-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .share-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .share-facebook {
+            background: #1877F2;
+        }
+
+        .share-twitter {
+            background: #1DA1F2;
+        }
+
+        .share-linkedin {
+            background: #0A66C2;
+        }
+
+        .share-whatsapp {
+            background: #25D366;
+        }
+
+        .related-posts {
+            list-style: none;
+        }
+
+        .related-posts li {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .related-posts li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .related-posts a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .related-posts a:hover {
+            color: var(--secondary);
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .cta-box h3 {
+            color: white;
+            margin-bottom: 0.75rem;
+        }
+
+        .cta-box p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-box .btn {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .cta-box .btn:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        /* ============ BOTTOM NAVIGATION ============ */
+        .article-nav {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .nav-item {
+            padding: 1.5rem;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-soft);
+            text-decoration: none;
+            color: var(--foreground);
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            box-shadow: var(--shadow-elevated);
+            transform: translateY(-4px);
+        }
+
+        .nav-label {
+            font-size: 0.75rem;
+            color: var(--foreground-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ============ COMMENTS SECTION ============ */
+        .comments-section {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .comments-section h2 {
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .article-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .article-nav {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .article-content {
+                padding: 1.5rem;
+            }
+
+            .sidebar {
+                order: -1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- ============ HEADER ============ -->
+    <header>
+        <nav>
+            <a href="#" class="logo">
+                <div class="logo-icon">M</div>
+                MGVP Blog
+            </a>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#" class="cta-button">Donate Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ============ BREADCRUMB ============ -->
+    <div class="breadcrumb">
+        <a href="#">Home</a> / <a href="#">Blog</a> / <span>Environment</span>
+    </div>
+
+    <!-- ============ ARTICLE HEADER ============ -->
+    <article class="article-header">
+        <div class="article-meta">
+            <span class="article-category">Environment</span>
+            <span class="article-meta-item">March 2025</span>
+            <span class="article-meta-divider"></span>
+            <span class="article-meta-item">📖 8 min read</span>
+            <span class="article-meta-divider"></span>
+            <span class="article-meta-item">👤 MGVP Communications</span>
+        </div>
+
+        <h1>When A Handpump Went Dry: Narayan Ji Chaudhary's 12-Year Quest to Save Darbhanga's Ponds</h1>
+
+        <p class="article-excerpt">
+            In 2005, when his office handpump ran completely dry, one man decided to fight back. His 12-year journey transformed into a national environmental movement that saved 200+ ponds and inspired thousands of people across India.
+        </p>
+
+        <div class="article-author-info">
+            <div class="author-avatar">M</div>
+            <div class="author-details">
+                <h4>MGVP Communications Team</h4>
+                <p>Sharing stories of impact, change, and environmental activism from Mithila, Bihar.</p>
+            </div>
+        </div>
+    </article>
+
+    <!-- ============ FEATURED IMAGE ============ -->
+    <div class="article-featured-image">
+        <img src="https://pplx-res.cloudinary.com/image/upload/v1762637982/pplx_project_search_images/bbd043fdfe47029c4c52cf45e11aecbe354b52ac.png" alt="Featured image">
+        <p class="image-caption">Narayan Ji Chaudhary has dedicated 12 years to the Talab Bachao Abhiyan pond restoration movement.</p>
+    </div>
+
+    <!-- ============ MAIN CONTENT + SIDEBAR ============ -->
+    <div class="article-layout">
+        
+        <!-- ============ ARTICLE CONTENT ============ -->
+        <div class="article-container">
+            <div class="article-content">
+
+                <h2>The Story Begins: 2005</h2>
+                <p>In 2005, <strong>Narayan Ji Chaudhary</strong> faced a moment that would change the course of his life—and Darbhanga's future. His office handpump, once a reliable source of water, ran completely dry. It was a wake-up call.</p>
+
+                <p><strong>Darbhanga</strong>, once home to <strong>213 ponds</strong>, was losing its lifeline. Illegal encroachment, pollution, and apathy had reduced this to barely functioning water bodies. Narayan Ji realized something had to change.</p>
+
+                <div class="highlight-box">
+                    <strong>Key Insight:</strong> When a man's office handpump dries up in a water-rich region, it signals a systemic crisis. This wasn't just a personal problem—it was a community survival issue.
+                </div>
+
+                <h2>The Research Phase (2005-2010)</h2>
+                <p>He didn't start with protests or petitions. He started with <strong>research</strong>. He met <strong>Rajendra Singh</strong>, the "Jal Purush" (Water Man) of Rajasthan, who had successfully revived thousands of ponds. He studied their methods, learned from their successes and failures.</p>
+
+                <p>By 2010, Narayan Ji launched the <strong>Talab Bachao Abhiyan (TBA)—a movement to save Darbhanga's ponds</strong>. What started as one man's determination became a community movement.</p>
+
+                <h2>Impact Over 12 Years</h2>
+                <p>Over 12 years of relentless effort:</p>
+                <ul>
+                    <li><strong>213 ponds</strong> mapped and documented</li>
+                    <li><strong>50 ponds</strong> completely filled or destroyed</li>
+                    <li><strong>200+ ponds</strong> restored or protected</li>
+                    <li>Multiple successful <strong>NGT (National Green Tribunal) petitions</strong></li>
+                    <li><strong>3 heritage ponds</strong> (Dighi, Harai, Ganga Sagar) under legal protection</li>
+                    <li><strong>Hundreds of community members</strong> mobilized</li>
+                    <li>Signature campaigns, exhibitions, protests, and meetings with political leaders</li>
+                </ul>
+
+                <blockquote>
+                    "When my office handpump went dry in 2005, I realized if we don't save our ponds, this water-rich region will become like any other drought-stricken area in India." — Narayan Ji Chaudhary
+                </blockquote>
+
+                <h2>The Challenge</h2>
+                <p>The journey wasn't easy. Multiple obstacles had to be overcome:</p>
+
+                <table>
+                    <tr>
+                        <th>Challenge</th>
+                        <th>Impact</th>
+                        <th>Solution</th>
+                    </tr>
+                    <tr>
+                        <td>Land Mafia Opposition</td>
+                        <td>Threatened activists</td>
+                        <td>Community mobilization + NGT support</td>
+                    </tr>
+                    <tr>
+                        <td>Administrative Indifference</td>
+                        <td>Slow action on violations</td>
+                        <td>Media campaigns + legal pressure</td>
+                    </tr>
+                    <tr>
+                        <td>Political Pressure</td>
+                        <td>Politicians sided with encroachers</td>
+                        <td>Public awareness + voter pressure</td>
+                    </tr>
+                    <tr>
+                        <td>Community Fatigue</td>
+                        <td>Momentum loss over time</td>
+                        <td>Celebrating small victories</td>
+                    </tr>
+                </table>
+
+                <p>But Narayan Ji persisted, using documentation, community power, and legal mechanisms to push for change.</p>
+
+                <h2>Today's Reality</h2>
+                <p><strong>Talab Bachao Abhiyan is recognized nationally.</strong> The NGT order protecting 3 ponds sets a precedent for pond conservation across India. More importantly, the movement proved that grassroots activism—when backed by data and persistence—can challenge powerful interests.</p>
+
+                <div class="highlight-box">
+                    <strong>The Lesson:</strong> Environmental change doesn't require millions of dollars. It requires passion, documentation, community trust, and refusing to give up. Narayan Ji's story teaches us that one person, with determination and strategic action, can inspire systemic change.
+                </div>
+
+                <h2>What Comes Next?</h2>
+                <p>The fight continues. The NGT order is historic, but implementation is the real battle. Communities across Mithila are now using Narayan Ji's model to protect their own ponds. The movement that started with one man's dry handpump has become a regional call for water justice.</p>
+
+            </div>
+        </div>
+
+        <!-- ============ SIDEBAR ============ -->
+        <div class="sidebar">
+
+            <!-- Share Box -->
+            <div class="sidebar-widget">
+                <h3>Share This Story</h3>
+                <div class="social-share">
+                    <a href="#" class="share-btn share-facebook">f</a>
+                    <a href="#" class="share-btn share-twitter">𝕏</a>
+                    <a href="#" class="share-btn share-linkedin">in</a>
+                    <a href="#" class="share-btn share-whatsapp">W</a>
+                </div>
+            </div>
+
+            <!-- Related Posts -->
+            <div class="sidebar-widget">
+                <h3>Related Articles</h3>
+                <ul class="related-posts">
+                    <li><a href="#">The Numbers Behind a Crisis: How 213 Ponds Became Just 100</a></li>
+                    <li><a href="#">NGT's Historic Order: 3 Ponds to Be Restored</a></li>
+                    <li><a href="#">Makhana Farmers Losing Everything: How Pond Disappearance Threatens Bihar's Signature Crop</a></li>
+                    <li><a href="#">Climate Crisis Hits Darbhanga: 15-Year Analysis of Rising Temperatures</a></li>
+                </ul>
+            </div>
+
+            <!-- CTA Box -->
+            <div class="cta-box">
+                <h3>Help Save Ponds</h3>
+                <p>Support the Talab Bachao Abhiyan and help protect water resources across Mithila.</p>
+                <a href="#" class="btn">Donate Now</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ============ BOTTOM NAVIGATION ============ -->
+    <div class="article-nav">
+        <a href="#" class="nav-item">
+            <div class="nav-label">← Previous Article</div>
+            <div class="nav-title">Understanding Bihar's Water Crisis</div>
+        </a>
+        <a href="#" class="nav-item" style="text-align: right;">
+            <div class="nav-label">Next Article →</div>
+            <div class="nav-title">How Self-Help Groups Are Empowering Women</div>
+        </a>
+    </div>
+
+    <!-- ============ COMMENTS SECTION ============ -->
+    <div class="comments-section">
+        <h2>Join the Conversation</h2>
+        <p style="color: #999; margin-bottom: 2rem; font-style: italic;">Comments are currently closed. Thank you for your interest in this story!</p>
+    </div>
+
+    <!-- ============ FOOTER ============ -->
+    <footer>
+        <p>&copy; 2025 Mithila Gram Vikas Parishad. All rights reserved. | Designed with ❤️ for impact</p>
+    </footer>
+
+</body>
+</html>

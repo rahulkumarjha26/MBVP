@@ -1,99 +1,49 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import womenImage from "@/assets/hero-women-empowerment.jpg";
-import childrenImage from "@/assets/children-education.jpg";
-import environmentImage from "@/assets/pond-conservation.jpg";
+import { Link } from "react-router-dom";
+import { listArticleSummaries } from "@/content/articles";
 
-interface BlogPost {
-  id: number;
-  title: string;
-  excerpt: string;
-  category: string;
-  image: string;
-  author: string;
-  date: string;
-  readTime: string;
-}
-
-const blogPosts: BlogPost[] = [
-  {
-    id: 1,
-    title: "The Power of Self-Help Groups in Rural Transformation",
-    excerpt: "Exploring how women-led self-help groups are becoming engines of economic growth and social change in Mithila villages, creating ripple effects across entire communities.",
-    category: "Women Stories",
-    image: womenImage,
-    author: "Priya Sharma",
-    date: "March 15, 2024",
-    readTime: "8 min read",
-  },
-  {
-    id: 2,
-    title: "Talab Bachao Abhiyan: A Model for Water Conservation",
-    excerpt: "How our pond conservation campaign has become a blueprint for sustainable water management, attracting attention from environmental experts and policymakers nationwide.",
-    category: "Environment",
-    image: environmentImage,
-    author: "Dr. Rajesh Kumar",
-    date: "March 10, 2024",
-    readTime: "10 min read",
-  },
-  {
-    id: 3,
-    title: "Education as the Great Equalizer",
-    excerpt: "A deep dive into how quality education is breaking cycles of poverty in rural Bihar, with real data and stories from children whose lives have been transformed.",
-    category: "Education",
-    image: childrenImage,
-    author: "Anita Verma",
-    date: "March 5, 2024",
-    readTime: "6 min read",
-  },
-  {
-    id: 4,
-    title: "Madhubani Art: Preserving Heritage, Creating Livelihoods",
-    excerpt: "The revival of traditional Madhubani art is not just about cultural preservation—it's creating sustainable income for hundreds of women artisans across the region.",
-    category: "Women Stories",
-    image: womenImage,
-    author: "Kavita Jha",
-    date: "February 28, 2024",
-    readTime: "7 min read",
-  },
-  {
-    id: 5,
-    title: "Community-Led Development: The MGVP Approach",
-    excerpt: "Why we believe the best solutions come from communities themselves, and how our participatory approach is yielding better, more sustainable outcomes.",
-    category: "Impact",
-    image: environmentImage,
-    author: "Narayan Ji Chaudhary",
-    date: "February 20, 2024",
-    readTime: "9 min read",
-  },
-  {
-    id: 6,
-    title: "Breaking Barriers: Girls' Education in Rural Bihar",
-    excerpt: "Addressing the unique challenges facing girls' education and how targeted interventions are helping more girls stay in school and complete their education.",
-    category: "Education",
-    image: childrenImage,
-    author: "Sunita Singh",
-    date: "February 15, 2024",
-    readTime: "7 min read",
-  },
-];
+const blogPosts = listArticleSummaries();
 
 const Blog = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 9; // posts per page
 
-  const categories = ["All", "Women Stories", "Environment", "Education", "Impact", "News"];
+  const categories = [
+    "All",
+    "Women",
+    "Environment",
+    "Children",
+    "Community",
+    "Impact",
+  ];
 
   const filteredPosts = blogPosts.filter((post) => {
-    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
+    const matchesSearch =
+      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+    // articles use categoryDisplay (with emoji) in summaries
+    const matchesCategory =
+      selectedCategory === "All" || post.categoryDisplay === selectedCategory;
     return matchesSearch && matchesCategory;
   });
+
+  // reset to page 1 whenever filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedCategory]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredPosts.length / pageSize));
+  const paginatedPosts = filteredPosts.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -104,15 +54,16 @@ const Blog = () => {
           <div className="container px-4 text-center">
             <h1
               className="text-4xl md:text-5xl font-bold mb-4"
-              style={{ fontFamily: 'Poppins, sans-serif' }}
+              style={{ fontFamily: "Poppins, sans-serif" }}
             >
-              Blog & News
+              Impact Stories
             </h1>
             <p
               className="text-lg md:text-xl text-accent max-w-3xl mx-auto"
-              style={{ fontFamily: 'Open Sans, sans-serif' }}
+              style={{ fontFamily: "Open Sans, sans-serif" }}
             >
-              Stories, insights, and updates from the field
+              Real stories of transformation, hope, and lasting change from the
+              communities we serve
             </p>
           </div>
         </section>
@@ -157,7 +108,7 @@ const Blog = () => {
         <section className="py-16 md:py-20 bg-white">
           <div className="container px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPosts.map((post) => (
+              {paginatedPosts.map((post) => (
                 <article
                   key={post.id}
                   className="group bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-elevated transition-all duration-300 hover:-translate-y-2 flex flex-col"
@@ -165,12 +116,12 @@ const Blog = () => {
                   {/* Featured Image */}
                   <div className="relative h-52 overflow-hidden">
                     <img
-                      src={post.image}
+                      src={post.featuredImage}
                       alt={post.title}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                     />
                     <Badge className="absolute top-4 left-4 bg-secondary text-white font-semibold">
-                      {post.category}
+                      {post.categoryDisplay}
                     </Badge>
                   </div>
 
@@ -178,9 +129,14 @@ const Blog = () => {
                   <div className="p-6 flex-1 flex flex-col">
                     <h2
                       className="text-xl font-bold text-primary mb-3 group-hover:text-secondary transition-colors line-clamp-2"
-                      style={{ fontFamily: 'Poppins, sans-serif' }}
+                      style={{ fontFamily: "Poppins, sans-serif" }}
                     >
-                      {post.title}
+                      <Link
+                        to={`/blog/${post.slug}`}
+                        className="hover:underline"
+                      >
+                        {post.title}
+                      </Link>
                     </h2>
 
                     {/* Meta Info */}
@@ -192,16 +148,21 @@ const Blog = () => {
 
                     <p
                       className="text-foreground/70 leading-relaxed mb-4 flex-1 line-clamp-3"
-                      style={{ fontFamily: 'Open Sans, sans-serif' }}
+                      style={{ fontFamily: "Open Sans, sans-serif" }}
                     >
                       {post.excerpt}
                     </p>
 
                     <div className="flex items-center justify-between pt-4 border-t">
-                      <span className="text-sm text-foreground/60">{post.readTime}</span>
-                      <button className="text-secondary hover:text-primary font-semibold text-sm transition-colors">
+                      <span className="text-sm text-foreground/60">
+                        {post.readTime}
+                      </span>
+                      <Link
+                        to={`/blog/${post.slug}`}
+                        className="text-secondary hover:text-primary font-semibold text-sm transition-colors"
+                      >
                         Read More →
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </article>
@@ -211,8 +172,55 @@ const Blog = () => {
             {filteredPosts.length === 0 && (
               <div className="text-center py-12">
                 <p className="text-lg text-foreground/70">
-                  No blog posts found. Try a different search term or category.
+                  No stories found. Try a different search term or category.
                 </p>
+              </div>
+            )}
+
+            {/* Pagination controls */}
+            {totalPages > 1 && (
+              <div className="mt-8 flex items-center justify-center gap-3">
+                <button
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className={`px-4 py-2 rounded-md border ${
+                    currentPage === 1
+                      ? "opacity-50 cursor-not-allowed"
+                      : "hover:bg-primary/10"
+                  }`}
+                >
+                  Previous
+                </button>
+
+                <div className="flex gap-2">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                    (p) => (
+                      <button
+                        key={p}
+                        onClick={() => setCurrentPage(p)}
+                        className={`px-3 py-2 rounded-md border ${
+                          p === currentPage ? "bg-primary text-white" : ""
+                        }`}
+                      >
+                        {p}
+                      </button>
+                    )
+                  )}
+                </div>
+
+                <button
+                  onClick={() =>
+                    setCurrentPage((p) => Math.min(totalPages, p + 1))
+                  }
+                  disabled={currentPage === totalPages}
+                  className={`px-4 py-2 rounded-md border ${
+                    currentPage === totalPages
+                      ? "opacity-50 cursor-not-allowed"
+                      : "hover:bg-primary/10"
+                  }`}
+                >
+                  Next
+                </button>
               </div>
             )}
           </div>
@@ -224,15 +232,16 @@ const Blog = () => {
             <div className="max-w-2xl mx-auto text-center">
               <h2
                 className="text-3xl md:text-4xl font-bold mb-4"
-                style={{ fontFamily: 'Poppins, sans-serif' }}
+                style={{ fontFamily: "Poppins, sans-serif" }}
               >
                 Stay Updated
               </h2>
               <p
                 className="text-lg text-accent mb-8"
-                style={{ fontFamily: 'Open Sans, sans-serif' }}
+                style={{ fontFamily: "Open Sans, sans-serif" }}
               >
-                Subscribe to our newsletter for the latest stories, updates, and insights from the field.
+                Subscribe to our newsletter for the latest stories, updates, and
+                insights from the field.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Input

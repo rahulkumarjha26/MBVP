@@ -1,5 +1,12 @@
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Twitter, Linkedin, Youtube, Mail } from "lucide-react";
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  Linkedin,
+  Youtube,
+  Mail,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -13,42 +20,63 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* About Column */}
           <div>
-            <h4 className="font-bold text-lg mb-4" style={{ fontFamily: 'Poppins, sans-serif' }}>
+            <h4
+              className="font-bold text-lg mb-4"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
               About MGVP
             </h4>
-            <p className="text-sm leading-relaxed opacity-90" style={{ fontFamily: 'Open Sans, sans-serif' }}>
-              Mithila Gram Vikas Parishad works on community development in the Mithila region, focusing on women's empowerment, child education, and environmental conservation.
+            <p
+              className="text-sm leading-relaxed opacity-90"
+              style={{ fontFamily: "Open Sans, sans-serif" }}
+            >
+              Mithila Gram Vikas Parishad works on community development in the
+              Mithila region, focusing on women's empowerment, child education,
+              and environmental conservation.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-bold text-lg mb-4" style={{ fontFamily: 'Poppins, sans-serif' }}>
+            <h4
+              className="font-bold text-lg mb-4"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
               Quick Links
             </h4>
-            <ul className="space-y-2 text-sm" style={{ fontFamily: 'Open Sans, sans-serif' }}>
+            <ul
+              className="space-y-2 text-sm"
+              style={{ fontFamily: "Open Sans, sans-serif" }}
+            >
               <li>
-                <Link to="/about" className="text-accent hover:text-white transition-colors">
+                <Link
+                  to="/about"
+                  className="text-accent hover:text-white transition-colors"
+                >
                   Our Mission
                 </Link>
               </li>
               <li>
-                <Link to="/our-work" className="text-accent hover:text-white transition-colors">
+                <Link
+                  to="/our-work"
+                  className="text-accent hover:text-white transition-colors"
+                >
                   Programs
                 </Link>
               </li>
               <li>
-                <Link to="/impact-stories" className="text-accent hover:text-white transition-colors">
-                  Impact Stories
-                </Link>
-              </li>
-              <li>
-                <Link to="/blog" className="text-accent hover:text-white transition-colors">
+                <Link
+                  to="/blog"
+                  className="text-accent hover:text-white transition-colors"
+                >
                   Blog
                 </Link>
               </li>
               <li>
-                <Link to="/get-involved" className="text-accent hover:text-white transition-colors">
+                <Link
+                  to="/get-involved"
+                  className="text-accent hover:text-white transition-colors"
+                >
                   Get Involved
                 </Link>
               </li>
@@ -57,32 +85,53 @@ const Footer = () => {
 
           {/* Resources */}
           <div>
-            <h4 className="font-bold text-lg mb-4" style={{ fontFamily: 'Poppins, sans-serif' }}>
+            <h4
+              className="font-bold text-lg mb-4"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
               Resources
             </h4>
-            <ul className="space-y-2 text-sm" style={{ fontFamily: 'Open Sans, sans-serif' }}>
+            <ul
+              className="space-y-2 text-sm"
+              style={{ fontFamily: "Open Sans, sans-serif" }}
+            >
               <li>
-                <Link to="/annual-report" className="text-accent hover:text-white transition-colors">
+                <Link
+                  to="/annual-report"
+                  className="text-accent hover:text-white transition-colors"
+                >
                   Annual Report
                 </Link>
               </li>
               <li>
-                <Link to="/transparency" className="text-accent hover:text-white transition-colors">
+                <Link
+                  to="/transparency"
+                  className="text-accent hover:text-white transition-colors"
+                >
                   Financial Transparency
                 </Link>
               </li>
               <li>
-                <Link to="/privacy" className="text-accent hover:text-white transition-colors">
+                <Link
+                  to="/privacy"
+                  className="text-accent hover:text-white transition-colors"
+                >
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link to="/terms" className="text-accent hover:text-white transition-colors">
+                <Link
+                  to="/terms"
+                  className="text-accent hover:text-white transition-colors"
+                >
                   Terms of Use
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-accent hover:text-white transition-colors">
+                <Link
+                  to="/contact"
+                  className="text-accent hover:text-white transition-colors"
+                >
                   Contact Us
                 </Link>
               </li>
@@ -91,10 +140,13 @@ const Footer = () => {
 
           {/* Connect */}
           <div>
-            <h4 className="font-bold text-lg mb-4" style={{ fontFamily: 'Poppins, sans-serif' }}>
+            <h4
+              className="font-bold text-lg mb-4"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
               Connect With Us
             </h4>
-            
+
             {/* Social Icons */}
             <div className="flex gap-3 mb-6">
               {[
@@ -133,8 +185,12 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10">
-          <p className="text-center text-sm text-white/70" style={{ fontFamily: 'Open Sans, sans-serif' }}>
-            © {currentYear} Mithila Gram Vikas Parishad. All rights reserved. | Designed with ❤️ for impact
+          <p
+            className="text-center text-sm text-white/70"
+            style={{ fontFamily: "Open Sans, sans-serif" }}
+          >
+            © {currentYear} Mithila Gram Vikas Parishad. All rights reserved. |
+            Designed with ❤️ for impact
           </p>
         </div>
       </div>
